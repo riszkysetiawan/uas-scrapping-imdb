@@ -40,12 +40,23 @@ st.title("Scrapping Film IMDB")
 
 # Bubble Plot: Relationship antara Anggaran, Pendapatan Global, dan Durasi Film
 st.header("Relationship antara Anggaran, Pendapatan Global, dan Durasi Film")
+st.write("""
+Grafik ini menunjukkan hubungan antara anggaran (Budget), pendapatan global (Gross worldwide), dan durasi film (Runtime). 
+Sumbu X mewakili anggaran film, sumbu Y mewakili pendapatan global, dan ukuran bubble menunjukkan durasi film. 
+Grafik ini membantu untuk melihat korelasi antara anggaran dan pendapatan film serta bagaimana durasi film mempengaruhi keduanya.
+""")
 fig_bubble = px.scatter(filtered_data, x='Budget', y='Gross worldwide', size='Runtime',
                         hover_name='Title', title='Relationship antara Anggaran, Pendapatan Global, dan Durasi Film')
 st.plotly_chart(fig_bubble)
 
 # Column Chart: Comparison Pendapatan AS & Kanada dengan Pendapatan Global
 st.header("Comparison Pendapatan AS & Kanada dengan Pendapatan Global")
+st.write("""
+Grafik ini membandingkan pendapatan film di AS & Kanada dengan pendapatan global. 
+Setiap film diwakili oleh dua bar, satu untuk pendapatan di AS & Kanada dan satu lagi untuk pendapatan global. 
+Grafik ini menunjukkan perbedaan antara pendapatan yang dihasilkan dari AS & Kanada dan pendapatan global, 
+serta performa film di pasar domestik dibandingkan dengan pasar internasional.
+""")
 fig_column = go.Figure(data=[
     go.Bar(name='Pendapatan AS & Kanada', x=filtered_data['Title'], y=filtered_data['Gross US & Canada']),
     go.Bar(name='Pendapatan Global', x=filtered_data['Title'], y=filtered_data['Gross worldwide'])
@@ -55,11 +66,23 @@ st.plotly_chart(fig_column)
 
 # Line Histogram: Distribusi Anggaran Film
 st.header("Distribusi Anggaran Film")
+st.write("""
+Histogram ini menunjukkan distribusi anggaran film. 
+Sumbu X mewakili anggaran film dan jumlah bins menunjukkan frekuensi atau jumlah film berdasarkan anggarannya. 
+Histogram ini membantu untuk memahami sebaran anggaran dalam dataset, 
+seperti apakah lebih banyak film dengan anggaran kecil atau besar.
+""")
 fig_histogram = px.histogram(filtered_data, x='Budget', title='Distribusi Anggaran Film', nbins=20)
 st.plotly_chart(fig_histogram)
 
 # Stacked Area Chart: Komposisi Pendapatan Film sepanjang Waktu
 st.header("Komposisi Pendapatan Film sepanjang Waktu")
+st.write("""
+Grafik ini menunjukkan komposisi pendapatan film dari AS & Kanada dan pendapatan global sepanjang waktu. 
+Sumbu X mewakili nama film dan sumbu Y mewakili pendapatan. 
+Area grafik menunjukkan kontribusi pendapatan dari AS & Kanada terhadap total pendapatan global sepanjang waktu. 
+Ini membantu untuk melihat bagaimana pendapatan dari kedua sumber ini berubah dan berkontribusi terhadap total pendapatan film.
+""")
 fig_area = go.Figure()
 fig_area.add_trace(go.Scatter(x=filtered_data['Title'], y=filtered_data['Gross US & Canada'], fill='tonexty', name='Pendapatan AS & Kanada'))
 fig_area.add_trace(go.Scatter(x=filtered_data['Title'], y=filtered_data['Gross worldwide'], fill='tonexty', name='Pendapatan Global'))
